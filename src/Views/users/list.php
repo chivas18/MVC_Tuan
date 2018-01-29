@@ -10,6 +10,7 @@
 	</style>
 </head>
 <body>
+	<h1>Test</h1>
 	<div align="center" style="color: red"><h1><?= isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?></h1></div>
 <table border="1" align="center">
 	<tr><td colspan="6" align="center" bgcolor="yellow"><h1>LIST USER</h1></td></tr>
