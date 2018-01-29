@@ -141,5 +141,6 @@ class Users extends Controller
 		//thiss
 		$user = $this->user->where('id',$user_id);
 		$user->delete();
+		$this->redirect('users/list');
 	}
 }
