@@ -10,6 +10,9 @@ $base_url = COMMON['base_url'];
 			width: 60px;
 			height: 60px;
 		}
+		a{
+			text-decoration: none;
+		}
 	</style>
 </head>
 <body>
@@ -34,7 +37,7 @@ $base_url = COMMON['base_url'];
 		<td><?= ($user->position== '1') ? 'Admin' : 'Member' ?></td>
 		<td><?= $user->description ?></td>
 		<td><img src="<?= empty($user->url_avatar) ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/2000px-Flag_of_Vietnam.svg.png' : $user->url_avatar ?>"></td>
-		<td><a href="">Edit</a></td>
+		<td><a href="<?= $base_url.'/users/editbyid/'.$user->id ?>">Edit</a></td>
 		<td><a href="<?= $base_url.'/users/delete/'.$user->id ?>">Delete</a></td>
 	</tr>
 <?php endforeach; session_destroy(); ?>

@@ -1,6 +1,5 @@
 <?php
 $base_url = COMMON['base_url'];
-date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,7 +67,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 				<td></td>
 				<td><input type="submit" name="submit" value="Submit"><input type="reset" name="submit" value="Reset"></td>
 			</tr>
-			<tr><td><input type="hidden" name="created_at" value="<?= date('d/m/Y H:i:s'); ?>"></td></tr>
+			<tr><td><input type="hidden" name="update_at" value="<?= date('d/m/Y H:i:s'); ?>"></td></tr>
 		</table>
 	</form>
 

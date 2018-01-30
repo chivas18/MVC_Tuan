@@ -71,7 +71,7 @@ class Users extends Controller
 
 						if (isset($_POST['email']) && !empty($_POST['email'])){
 							$Password = $_POST['password'];
-							$data = [
+							$this->user->create([
 								'username' => $_POST['username'],
 								'password' => md5($Password),
 								'display_name' => $_POST['fullname'],
@@ -82,15 +82,13 @@ class Users extends Controller
 								'twitter' => $_POST['twitter'],
 								'phone' => $_POST['phone'],
 								'description' => $_POST['description'],
-								'created_at' =>$_POST['date_created'],
+								'created_at' =>$_POST['created_at'],
 								'url_avatar' => empty($_POST['file']) ? 'https://kenh14cdn.com/2017/1-1506422137960.jpg' : $_POST['file']
-							]; 
-							$insert = $this->user->insert($data);
-								$_SESSION['message'] = 'Successfully!!!';
-								$this->redirect('users');
+							]); 
+							$_SESSION['message'] = 'Successfully!!!';
+							$this->redirect('users');
 						} else {
 							$_SESSION['err_message'] = 'Email is empty!';
-
 							$this->view('users/add');
 						}
 						
@@ -118,19 +116,42 @@ class Users extends Controller
 	* Example for create user use Modle User 
 	* @method POST
 	*/
-	public function update()
+	public function updated()
 	{
-		// $user_id = $_POST['user_id'];
-		// $username = $_POST['username'];
-		// $password = $_POST['password'];
-		// $email = $_POST['email'];
-		// //thiss
-		// $user = $this->user->where('id',$user_id);
+		$check = true;
+		$id = $_POST['id'];
+		$password = $_POST['password'];
+		if (empty($_POST['display_name'])) {
+			$_SESSION['err_message'] = 'Full name is empty!';
+			$check = false;
+		}
+		if (empty($_POST['email'])){
+			$_SESSION['err_email'] = 'Email is empty!';
+			$check = false;
+		}
+		if (empty($password) || $password != $_POST['re-password']) {
+			$_SESSION['err_password'] = 'Password error!!!';
+			$check = false;
+		}
+		if ($check == true) {
+			$password = md5($password);
+			$user = $this->user->where('id',$id);
 
-		// $user->username = $username;
-		// $user->password = $password;
-		// $user->email = $email;
-		// $user->save();
+			$user->display_name = $_POST['display_name'];
+			$user->email = $_POST['email'];
+					//$user->position = $_POST['position'];
+			$user->facebook = $_POST['facebook'];
+			$user->google = $_POST['google'];
+					//$user->twitter = $_POST['twitter'];
+			$user->phone = $_POST['phone'];
+			$user->description = $_POST['description'];
+			$user->updated_at = $_POST['updated_at'];
+			$user->save();
+			$_SESSION['message'] = 'Update successfully!!!';
+			$user = $this->redirect('/users/viewbyid/'.$user->id);
+		}else{
+			$this->redirect('/users/editbyid/'.$id);
+		}
 	}
 
 	/**

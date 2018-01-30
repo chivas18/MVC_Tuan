@@ -16,7 +16,7 @@ class User extends BaseModel
 {
 	public $name;
 	protected $table = 'users';
-	protected $fillable = ['id','username','password','email','display_name','position','status','facebook','google','twitter','phone','description','url_avatar','date_created'];
+	protected $fillable = ['id','username','password','email','display_name','position','status','facebook','google','twitter','phone','description','url_avatar','created_at,updated_at'];
 
 	public static function checkLogin($username,$password)
 	{
@@ -27,12 +27,6 @@ class User extends BaseModel
 		} else {
 			return false;
 		}
-		
-	}
-
-	public static function insert(array $value)
-	{
-		$insert = User::create($value);
 		
 	}
 

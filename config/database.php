@@ -8,6 +8,8 @@
  *
  * @package config/database
  */
+
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 use Illuminate\Database\Capsule\Manager as Capsule;
 $capsule = new Capsule();
 // Init Connection
