@@ -1,3 +1,7 @@
+<?php
+$base_url = COMMON['base_url'];
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +34,7 @@
 			<tr><td><b>GOOGLE: </b></td><td><input type="text" name="google" value="<?= $user->google ?>"></td></tr>
 			<tr><td><b>PHONE: </b></td><td><input type="number" name="phone" value="<?= $user->phone ?>"></td></tr>
 			<tr><td><b>DESCRIPTION: </b></td><td><input type="" name="description" value="<?= $user->description ?>"></td></tr>
-			<tr><td><input type="hidden" name="date_created" value="<?= getdate(); ?>"></td></tr>
+			<tr><td><input type="hidden" name="date_created" value="<?= date(); ?>"></td></tr>
 		<?php endforeach; ?>
 	</table>
 </form>
