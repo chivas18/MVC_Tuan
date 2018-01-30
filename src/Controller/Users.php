@@ -34,9 +34,9 @@ class Users extends Controller
 	/**
 	* Example for create user use Modle User 
 	*/
-	public function edit($user_id)
+	public function editbyid($user_id)
 	{
-		$users = $this->user->find()->where('id',$user_id)->get();
+		$users = $this->user->find(1)->where('id',$user_id)->get();
 		//return view
 		$this->view('users/edit',array( 'users'=> $users));
 	}
@@ -82,6 +82,7 @@ class Users extends Controller
 								'twitter' => $_POST['twitter'],
 								'phone' => $_POST['phone'],
 								'description' => $_POST['description'],
+								'created_at' =>$_POST['date_created'],
 								'url_avatar' => empty($_POST['file']) ? 'https://kenh14cdn.com/2017/1-1506422137960.jpg' : $_POST['file']
 							]; 
 							$insert = $this->user->insert($data);
@@ -119,17 +120,17 @@ class Users extends Controller
 	*/
 	public function update()
 	{
-		$user_id = $_POST['user_id'];
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$email = $_POST['email'];
-		//thiss
-		$user = $this->user->where('id',$user_id);
+		// $user_id = $_POST['user_id'];
+		// $username = $_POST['username'];
+		// $password = $_POST['password'];
+		// $email = $_POST['email'];
+		// //thiss
+		// $user = $this->user->where('id',$user_id);
 
-		$user->username = $username;
-		$user->password = $password;
-		$user->email = $email;
-		$user->save();
+		// $user->username = $username;
+		// $user->password = $password;
+		// $user->email = $email;
+		// $user->save();
 	}
 
 	/**
