@@ -29,7 +29,6 @@ class User extends BaseModel
 		}
 		
 	}
-
 	public static function paging()
 	{
 		$list = DB::table('users')->paginate(10);

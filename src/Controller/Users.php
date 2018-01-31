@@ -121,6 +121,7 @@ class Users extends Controller
 		$check = true;
 		$id = $_POST['id'];
 		$password = $_POST['password'];
+		$password = md5($password);
 		if (empty($_POST['display_name'])) {
 			$_SESSION['err_message'] = 'Full name is empty!';
 			$check = false;
@@ -134,21 +135,28 @@ class Users extends Controller
 			$check = false;
 		}
 		if ($check == true) {
-			$password = md5($password);
-			$user = $this->user->where('id',$id);
+			$display_name = $_POST['display_name'];
+			$email = $_POST['email'];
+			$facebook = $_POST['facebook'];
+			$google = $_POST['google'];
+			$phone = $_POST['phone'];
+			$description = $_POST['description'];
+			$updated_at = $_POST['updated_at'];
+			
+			$user = $this->user->find($id);
 
-			$user->display_name = $_POST['display_name'];
-			$user->email = $_POST['email'];
-					//$user->position = $_POST['position'];
-			$user->facebook = $_POST['facebook'];
-			$user->google = $_POST['google'];
-					//$user->twitter = $_POST['twitter'];
-			$user->phone = $_POST['phone'];
-			$user->description = $_POST['description'];
-			$user->updated_at = $_POST['updated_at'];
+			$user->display_name = $display_name;
+			$user->email = $email;
+			$user->facebook = $facebook;
+			$user->google = $google;
+			$user->phone = $phone;
+			$user->description = $description;
+			$user->updated_at = $updated_at;
 			$user->save();
 			$_SESSION['message'] = 'Update successfully!!!';
-			$user = $this->redirect('/users/viewbyid/'.$user->id);
+			$user = $this->redirect('/users/viewbyid/'.$id);
+			//$user->position = $_POST['position'];
+			//$user->twitter = $_POST['twitter'];
 		}else{
 			$this->redirect('/users/editbyid/'.$id);
 		}
