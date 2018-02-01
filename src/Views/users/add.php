@@ -9,29 +9,29 @@ $base_url = COMMON['base_url'];
 </head>
 <body >
 
-	<form method="post" action="<?= $base_url ?>/users/create" actl>
+	<form method="post" action="<?= $base_url ?>/users/create" enctype="multipart/form-data">
 		<table>
 			<tr><td align="center" colspan="2"><h1>Register</h1></td></tr>
-			<tr><td colspan="2" align="center" style="color: red"><?php echo isset($_SESSION['err_message']) ? $_SESSION['err_message'] : ''  ?></td></tr>
+			<tr><td colspan="2" align="center" style="color: red"><?php echo isset($_GET['err_message']) ? $_GET['err_message'] : ''  ?></td></tr>
 			<tr>
 				<td>User name: </td>
-				<td><input type="text" name="username" placeholder="User name" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : '' ?>"><label style="color: red">*</label></td>
+				<td><input type="text" name="username" placeholder="User name" value="<?php echo isset($_GET['username']) ? $_GET['username'] : '' ?>"><label style="color: red" title="Bắt buộc phải nhập!">*</label></td>
 			</tr>
 			<tr>
 				<td>Password: </td>
-				<td><input type="password" name="password" placeholder="Password"><label style="color: red">*</label></td>
+				<td><input type="password" name="password" placeholder="Password"><label style="color: red" title="Bắt buộc phải nhập!">*</label></td>
 			</tr>
 			<tr>
 				<td>Re-Password: </td>
-				<td><input type="password" name="re-password" placeholder="Re-Password"><label style="color: red">*</label></td>
+				<td><input type="password" name="re-password" placeholder="Re-Password"><label style="color: red" title="Bắt buộc phải nhập!">*</label></td>
 			</tr>
 			<tr>
 				<td>Full name</td>
-				<td><input type="text" name="fullname" placeholder="Full name" value="<?php echo isset($_SESSION['fullname']) ? $_SESSION['fullname'] : '' ?>"><label style="color: red">*</label></td>
+				<td><input type="text" name="display_name" placeholder="Full name" value="<?php echo isset($_GET['display_name']) ? $_GET['display_name'] : '' ?>" ><label style="color: red" title="Bắt buộc phải nhập!">*</label></td>
 			</tr>
 			<tr>
 				<td>Email: </td>
-				<td><input type="email" name="email" placeholder="Email"><label style="color: red">*</label></td>
+				<td><input type="email" name="email" placeholder="Email" <?php echo isset($_GET['email']) ? $_GET['email'] : '' ?>><label style="color: red" title="Bắt buộc phải nhập!">*</label></td>
 			</tr>
 			<tr>
 				<td>Position: </td>

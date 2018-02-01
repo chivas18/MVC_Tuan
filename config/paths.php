@@ -45,4 +45,4 @@ define('CONFIG', ROOT . DS . 'config' . DS);
 /**
  * File path to the webroot directory.
  */
-define('PUBLIC', ROOT . DS . 'public' . DS);
+define('PUBLICS', ROOT . DS . 'public' . DS);

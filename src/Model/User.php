@@ -29,6 +29,17 @@ class User extends BaseModel
 		}
 		
 	}
+	public static function checkUsername($username)
+	{
+		$user = User::find(1)->where('username',$username)->get()->toarray(); 
+		
+		if (!empty($user)) {
+			return $user;
+		} else {
+			return false;
+		}
+		
+	}
 	public static function paging()
 	{
 		$list = DB::table('users')->paginate(10);

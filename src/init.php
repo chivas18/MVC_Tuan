@@ -15,7 +15,6 @@ require_once '../vendor/autoload.php';
 require_once 'Utility/Util.php';
 // Load All file Config 
 Util::includeFiles('../config/*.php'); // in here load file database.php
-
 //
 require_once 'Core/Cookie.php';
 //

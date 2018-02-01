@@ -30,7 +30,6 @@ class Users extends Controller
 		return;
 	}
 
-
 	/**
 	* Example for create user use Modle User 
 	*/
@@ -40,8 +39,6 @@ class Users extends Controller
 		//return view
 		$this->view('users/edit',array( 'users'=> $users));
 	}
-
-
 
 	/**
 	* Example for create user use Modle User 
@@ -57,76 +54,81 @@ class Users extends Controller
 	* @method POST
 	*/
 	public function create()
-	{     
-		// var_dump($_FILES);
-		// die();
+	{ 
+		//Lấy đuôi file và đổi thành chữ thường
+		$i = strstr($_FILES['avatar']['name'],'.');
+		$i = strtolower($i);
+		//Lấy ngày hiện tại và ghép thêm 5 kí tự
+		//$f = date('Ymd');
+		//$f = $_POST['username'].$f.Util::random5();
+		//Đổi tên file
+		$str = preg_replace('([^a-z0-9])', '', $_POST['username']);
+		if ($_FILES['avatar']['name'] != NULL) {
+			$imgName = $_FILES['avatar']['name'] = $str.date('Ymd').$i;
+		}
 		if (isset($_POST['username']) && !empty($_POST['username'])) {
-			$_SESSION['username'] = $_POST['username'];
-
-			if (isset($_POST['password']) && isset($_POST['re-password']) && !empty($_POST['password']) && !empty($_POST['re-password'])) {
-
-				if ($_POST['password'] == $_POST['re-password']) {
-
-					if (isset($_POST['fullname']) && !empty($_POST['fullname'])) {
-						$_SESSION['fullname'] = $_POST['fullname'];
-
-						if (isset($_POST['email']) && !empty($_POST['email'])){
-							$Password = $_POST['password'];
-							$this->user->create([
-								'username' => $_POST['username'],
-								'password' => md5($Password),
-								'display_name' => $_POST['fullname'],
-								'email' => $_POST['email'],
-								'position' => $_POST['position'],
-								'facebook' => $_POST['facebook'],
-								'google' => $_POST['google'],
-								'twitter' => $_POST['twitter'],
-								'phone' => $_POST['phone'],
-								'description' => $_POST['description'],
-								'created_at' =>$_POST['created_at'],
-								// 'url_avatar' => if(isset($_FILES['avatar'])){
-								// 	if ($_FILES['avatar']['error'] > 0) {
-								// 		$_SESSION['err_message'] = "File is error!!!";
-								// 	} else {
-								// 		if (($_FILES['avatar']['type'] != 'jpg') || ($_FILES['avatar']['type'] != 'jpeg') || ($_FILES['avatar']['type'] != 'png') || ($_FILES['avatar']['type'] != 'gif')) {
-								// 			$_SESSION['err_message'] = "File is not image!";
-								// 		}else{
-								// 			if ($_FILES['avatar']['size'] > 1048000) {
-								// 				$_SESSION['err_message'] = "File > 1Mb";
-								// 			}else{
-								// 				echo $_POST['avatar'];
-								// 			}
-								// 		}
-								// 	}
-								// }else{
-								// 	echo COMMON['base_url'].'/img/users/cakephp.png';
-								// }
-							]); 
-							if ($this->user['url_avatar'] == $_POST['avatar']) {
-								move_uploaded_file($_FILES['avatar']['tmp_name'], './public/img/users/'.$_FILES['avatar']['name']);
+			if ($str === $_POST['username']) {
+				$username = User::checkUsername($_POST['username']);
+				if (!$username) {
+					$_SESSION['username'] = $_POST['username'];
+					if (isset($_POST['password']) && isset($_POST['re-password']) && !empty($_POST['password']) && !empty($_POST['re-password'])) {
+						if ($_POST['password'] == $_POST['re-password']) {
+							if (isset($_POST['display_name']) && !empty($_POST['display_name'])) {
+								if (isset($_POST['email']) && !empty($_POST['email'])){
+									$Password = $_POST['password'];
+									if ($_FILES['avatar']['name'] != NULL) {
+										if ($i == "jpeg" || $i == "png" || $i == "gif" || $i == "jpg") {
+											$maxFileSize = 2 * 1000 * 1000;
+											if ($_FILES['avatar']['size'] > $maxFileSize) {
+												echo 'Tập tin không được vượt quá: '.$maxFileSize.' Byte';
+											} else {
+												$tmp_name = $_FILES['avatar']['tmp_name'];
+												move_uploaded_file($tmp_name,PUBLICS.'uploads/users/'.$imgName);
+											}
+											
+										} else {
+											echo 'File is an image!';
+										}
+										
+									} else {
+										echo 'Please select file!';
+									}
+									$url_avatar = PUBLICS.'uploads/users/'.$imgName;
+									$this->user->create([
+										'username' => strtolower(stripslashes(trim($_POST['username']))),
+										'password' => md5($Password),
+										'display_name' => $_POST['display_name'],
+										'email' => $_POST['email'],
+										'position' => $_POST['position'],
+										'facebook' => $_POST['facebook'],
+										'google' => $_POST['google'],
+										'twitter' => $_POST['twitter'],
+										'phone' => $_POST['phone'],
+										'description' => $_POST['description'],	
+										'url_avatar' => $url_avatar							
+									]); 
+									$_SESSION['message'] = 'Successfully!!!';
+									$this->redirect('users');
+								} else {
+									$this->redirect('users/add?username='.$_POST['username'].'&display_name='.$_POST['display_name'].'&err_message=Email is empty!');
+								}
+							} else {
+								$this->redirect('users/add?username='.$_POST['username'].'&err_message=Full name is empty!');
 							}
-							$_SESSION['message'] = 'Successfully!!!';
-							$this->redirect('users');
-						} else {
-							$_SESSION['err_message'] = 'Email is empty!';
-							$this->view('users/add');
+						}else{
+							$this->redirect('users/add?username='.$_POST['username'].'&err_message=Password and Re-Password not equal!');
 						}
-						
 					} else {
-						$_SESSION['err_message'] = 'Full name is empty!';
-						$this->view('users/add');
+						$this->redirect('users/add?username='.$_POST['username'].'&err_message=Password or Re-Password is empty!');			
 					}
-				}else{
-					$_SESSION['err_message'] = 'Password and Re-Password not equal!';
-					$this->view('users/add');
+				} else {	
+					$this->redirect('users/add?username='.$_POST['username'].'&err_message=User name đã tồn tại!');			
 				}
 			} else {
-				$_SESSION['err_message'] = 'Password or Re-Password is empty!';				
-				$this->view('users/add');
+				$this->redirect('users/add?username='.$_POST['username'].'&err_message=User name incorrected!');		
 			}
 		} else {
-			$_SESSION['err_message'] = 'User name is empty!';
-			$this->view('users/add');
+			$this->redirect('users/add?username='.$_POST['username'].'&err_message=User name is empty!');	
 		}
 		
 	}
@@ -155,23 +157,16 @@ class Users extends Controller
 			$check = false;
 		}
 		if ($check == true) {
-			$display_name = $_POST['display_name'];
-			$email = $_POST['email'];
-			$facebook = $_POST['facebook'];
-			$google = $_POST['google'];
-			$phone = $_POST['phone'];
-			$description = $_POST['description'];
-			$updated_at = $_POST['updated_at'];
 			
 			$user = $this->user->find($id);
 
-			$user->display_name = $display_name;
-			$user->email = $email;
-			$user->facebook = $facebook;
-			$user->google = $google;
-			$user->phone = $phone;
-			$user->description = $description;
-			$user->updated_at = $updated_at;
+			$user->display_name = $_POST['display_name'];
+			$user->email = $_POST['email'];
+			$user->facebook = $_POST['facebook'];
+			$user->google = $_POST['google'];
+			$user->phone = $_POST['phone'];
+			$user->description = $_POST['description'];
+			$user->updated_at = $_POST['updated_at'];
 			$user->save();
 			$_SESSION['message'] = 'Update successfully!!!';
 			$user = $this->redirect('/users/viewbyid/'.$id);
