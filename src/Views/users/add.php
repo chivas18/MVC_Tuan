@@ -7,9 +7,9 @@ $base_url = COMMON['base_url'];
 	<title>ADD USER</title>
 	
 </head>
-<body>
+<body >
 
-	<form method="post" action="<?= $base_url ?>/users/create">
+	<form method="post" action="<?= $base_url ?>/users/create" actl>
 		<table>
 			<tr><td align="center" colspan="2"><h1>Register</h1></td></tr>
 			<tr><td colspan="2" align="center" style="color: red"><?php echo isset($_SESSION['err_message']) ? $_SESSION['err_message'] : ''  ?></td></tr>
@@ -61,13 +61,11 @@ $base_url = COMMON['base_url'];
 			</tr>
 			<tr>
 				<td>Avatar</td>
-				<td><input type="file" name="file" size="20"></td>
-			</tr>
+				<td><input type="file" name="avatar" size="20"></td>
 			<tr>
 				<td></td>
 				<td><input type="submit" name="submit" value="Submit"><input type="reset" name="submit" value="Reset"></td>
 			</tr>
-			<tr><td><input type="hidden" name="update_at" value="<?= date('d/m/Y H:i:s'); ?>"></td></tr>
 		</table>
 	</form>
 

@@ -39,7 +39,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 				<tr><td><b>PHONE: </b></td><td><input type="number" name="phone" value="<?= $user->phone ?>"></td></tr>
 				<tr><td><b>DESCRIPTION: </b></td><td><input type="" name="description" value="<?= $user->description ?>"></td></tr>
 				<tr><td><b>PASSWORD: </b></td><td><input type="password" name="password"></td><td align="center" style="color: red"><?= empty($_SESSION['err_password']) ? '' : $_SESSION['err_password']; ?></td></tr>
-				<tr><td><input type="hidden" name="updated_at" value="<?= date('Y-m-d H:i:s'); ?>"></td></tr>
+			
 				<tr><td><input type="hidden" name="id" value="<?= $user->id ?>"></td></tr>
 				<tr>
 					<td></td>

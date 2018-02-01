@@ -116,7 +116,7 @@ class Carbon extends DateTime
      *
      * @var string
      */
-    const DEFAULT_TO_STRING_FORMAT = 'Y-m-d H:i:s';
+    const DEFAULT_TO_STRING_FORMAT = 'd/m/Y H:i:s';
 
     /**
      * Format to use for __toString method when type juggling occurs.
@@ -462,7 +462,7 @@ class Carbon extends DateTime
             $year = 9999;
         }
 
-        $instance = static::createFromFormat('Y-n-j G:i:s', sprintf('%s-%s-%s %s:%02s:%02s', $year, $month, $day, $hour, $minute, $second), $tz);
+        $instance = static::createFromFormat('j/n/Y G:i:s', sprintf('%s-%s-%s %s:%02s:%02s', $year, $month, $day, $hour, $minute, $second), $tz);
 
         if ($fixYear !== null) {
             $instance->addYears($fixYear);

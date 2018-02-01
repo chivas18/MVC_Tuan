@@ -58,7 +58,8 @@ class Users extends Controller
 	*/
 	public function create()
 	{     
-
+		// var_dump($_FILES);
+		// die();
 		if (isset($_POST['username']) && !empty($_POST['username'])) {
 			$_SESSION['username'] = $_POST['username'];
 
@@ -83,8 +84,27 @@ class Users extends Controller
 								'phone' => $_POST['phone'],
 								'description' => $_POST['description'],
 								'created_at' =>$_POST['created_at'],
-								'url_avatar' => empty($_POST['file']) ? 'https://kenh14cdn.com/2017/1-1506422137960.jpg' : $_POST['file']
+								// 'url_avatar' => if(isset($_FILES['avatar'])){
+								// 	if ($_FILES['avatar']['error'] > 0) {
+								// 		$_SESSION['err_message'] = "File is error!!!";
+								// 	} else {
+								// 		if (($_FILES['avatar']['type'] != 'jpg') || ($_FILES['avatar']['type'] != 'jpeg') || ($_FILES['avatar']['type'] != 'png') || ($_FILES['avatar']['type'] != 'gif')) {
+								// 			$_SESSION['err_message'] = "File is not image!";
+								// 		}else{
+								// 			if ($_FILES['avatar']['size'] > 1048000) {
+								// 				$_SESSION['err_message'] = "File > 1Mb";
+								// 			}else{
+								// 				echo $_POST['avatar'];
+								// 			}
+								// 		}
+								// 	}
+								// }else{
+								// 	echo COMMON['base_url'].'/img/users/cakephp.png';
+								// }
 							]); 
+							if ($this->user['url_avatar'] == $_POST['avatar']) {
+								move_uploaded_file($_FILES['avatar']['tmp_name'], './public/img/users/'.$_FILES['avatar']['name']);
+							}
 							$_SESSION['message'] = 'Successfully!!!';
 							$this->redirect('users');
 						} else {

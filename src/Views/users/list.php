@@ -34,7 +34,10 @@ $base_url = COMMON['base_url'];
 <body>
 	<div align="center" style="color: red"><h1><?= isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?></h1></div>
 	<table border="1" align="center">
-		<tr><td colspan="8" align="center" bgcolor="yellow"><h1>LIST USER</h1></td></tr>
+		<tr><td colspan="8" align="center" bgcolor="yellow">
+			<h1>LIST USER</h1>
+			<a href="<?= $base_url.'/users/add' ?>">CREATE USER</a>
+		</td></tr>
 		<tr align="center">
 			<td><b>NO</b></td>
 			<td><b>USER NAME</b></td>
