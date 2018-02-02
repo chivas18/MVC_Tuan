@@ -2,8 +2,9 @@ Options -MultiViews
 RewriteEngine On
 
 RewriteBase /MVC_Tuan/public
-
-RewriteCond ${REQUEST_FILENAME} !-d
 RewriteCond ${REQUEST_FILENAME} !-f
-RewriteRule ^(.+)/(admin|css|fonts|ico|include|js|img|images)/(.*)$ $2/$3 [L]
+RewriteCond ${REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*?)\.(php|css|js|jpg|jpeg|png|pdf|gif)$ - [L]
+RewriteRule ^(.+)/(css|fonts|js|img|images|uploads)/(.*)$ $2/$3 [L]
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]

@@ -31,7 +31,7 @@ $base_url = COMMON['base_url'];
 			</tr>
 			<tr>
 				<td>Email: </td>
-				<td><input type="email" name="email" placeholder="Email" <?php echo isset($_GET['email']) ? $_GET['email'] : '' ?>><label style="color: red" title="Bắt buộc phải nhập!">*</label></td>
+				<td><input type="email" name="email" placeholder="Email" value="<?php echo isset($_GET['email']) ? $_GET['email'] : '' ?>"><label style="color: red" title="Bắt buộc phải nhập!">*</label></td>
 			</tr>
 			<tr>
 				<td>Position: </td>
