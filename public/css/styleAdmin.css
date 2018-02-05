@@ -1,0 +1,31 @@
+body{
+width: 1000px;
+margin: 0px auto;
+padding: 0px;
+text-align: center;
+align-content: center;	
+}
+#header{
+	background: #009cff;
+	height: 200px;
+}
+#container{
+	background: yellow;
+	height: 500px;
+}
+#container #menu-left{
+	background: pink;
+	width: 150px;
+	height: 500px;
+	float: left;
+}
+#container #content{
+	background: gray;
+	float: right;
+	width: 850px;
+	height: 500px;
+}
+#footer{
+	background: green;
+	height: 100px;
+}

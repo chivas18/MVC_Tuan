@@ -5,10 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="../public/css/style.css">
 </head>
 <body>
- <div id="header">
- 	<h1>HOME PAGE</h1>
- </div>
- <div id="content"></div>
- <div id="footer"></div>
-</body>
-</html>
+	<?php 
+	include_once 'layout/header.php';
+	include_once 'layout/content.php';
+	include_once 'layout/footer.php';
+	?>

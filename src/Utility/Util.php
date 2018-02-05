@@ -4,6 +4,7 @@
 */
 class Util
 {
+	
 	/**
 	* Function load all file in directory
 	*/

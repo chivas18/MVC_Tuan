@@ -4,7 +4,7 @@
 */
 class Session
 {
-
+	
 	public function destroySS()
 	{
 		session_destroy();

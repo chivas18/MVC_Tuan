@@ -229,4 +229,5 @@ class Users extends Controller
 		$user->delete();
 		$this->redirect('users/list');
 	}
+
 }
