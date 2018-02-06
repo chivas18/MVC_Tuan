@@ -35,7 +35,7 @@ class Users extends Controller
 		$start = ($current_page - 1) * $limit;
 
 		$users = $this->user->find(1)->offset($start)->take($limit)->get();
-		$this->view('users/list',array( 'users'=> $users));
+		$this->view('admin/index',array( 'users'=> $users));
 		return;
 	}
 
@@ -46,7 +46,7 @@ class Users extends Controller
 	{
 		$users = $this->user->find(1)->where('id',$user_id)->get(); 
 		//return view
-		$this->view('users/viewbyid',array( 'users'=> $users));
+		$this->view('admin/index',array( 'users'=> $users));
 		return;
 	}
 
@@ -57,7 +57,7 @@ class Users extends Controller
 	{
 		$users = $this->user->find(1)->where('id',$user_id)->get();
 		//return view
-		$this->view('users/edit',array( 'users'=> $users));
+		$this->view('admin/index',array( 'users'=> $users));
 	}
 
 	/**

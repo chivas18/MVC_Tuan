@@ -1,6 +1,7 @@
 <?php
 $base_url = COMMON['base_url'];
 date_default_timezone_set('Asia/Ho_Chi_Minh');
+if (!defined('IN_SITE')) die ('The request not found');
 ?>
 <!DOCTYPE html>
 <html>

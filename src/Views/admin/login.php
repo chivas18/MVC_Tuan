@@ -12,8 +12,8 @@ $base_url = COMMON['base_url'];
 </head>
 <body> 
 
-	<form method="post" action="<?= $base_url ?>/admin/login">
-		<h1>Login</h1><div style="color: red"><?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''  ?></div>
+	<form method="post" action="<?= $base_url ?>/admin/do_login">
+		<h1>Login</h1><div style="color: red"><?php echo isset($_GET['message']) ? $_GET['message'] : ''  ?></div>
 		<input type="text" name="username" placeholder="User name">
 		<input type="password" name="password" placeholder="Password">
 		<button type="submit" name="login" class="login">Login</button>
