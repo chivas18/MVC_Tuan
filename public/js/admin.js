@@ -5,7 +5,7 @@ function onDel() {
 			});
 		}else{
 			$(function(){
-				$('a').attr('href','<?= $base_url ?>/users/list/');
+				$('a').attr('href','<?= $base_url ?>/users/list');
 			});
 		}
 	}

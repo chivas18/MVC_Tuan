@@ -13,7 +13,7 @@ class Admin extends Controller
 	public function index()
 	{ 
 		if (isset($_SESSION['user']) && $_SESSION['user']['position'] == 1) {
-			$this->view('admin/index');
+			$this->view('admin/index/users/list');
 		}else{
 			$this->view('admin/login');
 		}
@@ -37,11 +37,7 @@ class Admin extends Controller
 				$session['user'] = $session['user'][0];
 				$this->setSS($session);
 				if ($_SESSION['user']['position'] == 1) {
-					$this->redirect('users/list');
-					$check = substr($_GET['url'],'/')
-					if ($check === 'viewbyid') {
-						$this->redirect('users/viewbyid');
-					}
+					$this->redirect('users');
 				}else{
 					$this->redirect('admin/login?message=Sorry babe! Your account is member not admin.');
 					$this->destroySS();

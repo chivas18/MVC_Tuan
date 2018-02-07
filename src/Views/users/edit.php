@@ -1,31 +1,10 @@
 <?php
-$base_url = COMMON['base_url'];
-date_default_timezone_set('Asia/Ho_Chi_Minh');
 if (!defined('IN_SITE')) die ('The request not found');
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home Page</title>
-	<style type="text/css">
-	img{
-		width: 100px;
-		height: 100px;
-	}
-</style>
-<script type="text/javascript">
-	function onSubmit() {
-		if(confirm("Are you sure you want to do this?") == false){
-			return false;
-		}
-	}
-</script>
-</head>
-<body>
 	<form method="POST" name="editForm" action="<?= $base_url ?>/users/updated" onsubmit="return onSubmit()">
 		<table border="0" align="center">
 			<?php foreach ($users as $user): ?>
-				<tr><td colspan="3" align="center" bgcolor="yellow"><img src="<?= $user->url_avatar ?>"><h1><?= $user->username ?></h1></td></tr>
+				<tr><td colspan="3" align="center" bgcolor="yellow"><img src="<?= $base_url.'/public/'.$user->url_avatar ?>"><h1><?= $user->username ?></h1></td></tr>
 				<input type="hidden" name="re-password" value="<?= $user->password ?>">
 				<tr><td><b>FULL NAME: </b></td><td><input type="text" name="display_name" value="<?= $user->display_name ?>"></td><td align="center" style="color: red"><?= empty($_SESSION['err_message']) ? '' : $_SESSION['err_message']; ?></td></tr>
 				<tr><td><b>EMAIL: </b></td><td><input type="text" name="email" value="<?= $user->email ?>"></td><td align="center" style="color: red"><?= empty($_SESSION['err_email']) ? '' : $_SESSION['err_email']; ?></td></tr>
@@ -46,8 +25,6 @@ if (!defined('IN_SITE')) die ('The request not found');
 					<td></td>
 					<td><input type="submit" name="submit" value="Submit">  <input type="button" value="Back" onclick="history.back()"></td>
 				</tr>
-			<?php endforeach; session_destroy(); ?>
+			<?php endforeach;unset($_SESSION['err_email']); ?>
 		</table>
 	</form>
-</body>
-</html>

@@ -1,19 +1,7 @@
 <?php if (!defined('IN_SITE')) die ('The request not found'); ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home Page</title>
-	<style type="text/css">
-	img{
-		width: 100px;
-		height: 100px;
-	}
-</style>
-</head>
-<body>
 	<table border="0" align="center">
 		<?php foreach ($users as $user): ?>
-			<tr><td colspan="2" align="center" bgcolor="yellow"><img src="<?= $user->url_avatar ?>"><h1><?= $user->username ?></h1></td></tr>
+			<tr><td colspan="2" align="center" bgcolor="yellow"><img src="<?= $base_url.'/public/'.$user->url_avatar ?>"><h1><?= $user->username ?></h1></td></tr>
 			<tr><td colspan="2" align="center" style="color: red"><?= empty($_SESSION['message']) ? '' : $_SESSION['message'] ?></td></tr>
 			<tr><td><b>PASSWORD: </b></td><td><?= isset($user->password) ? 'Có mật khẩu' : 'Rỗng nhé' ?></td></tr>
 			<tr><td><b>FULL NAME: </b></td><td><?= $user->display_name ?></td></tr>
@@ -27,8 +15,5 @@
 			<tr><td><b>PHONE: </b></td><td><?= $user->phone ?></td></tr>
 			<tr><td><b>DESCRIPTION: </b></td><td><?= $user->description ?></td></tr>
 			<tr><td></td><td><input type="button" value="Edit" onclick="window.location.href = '<?= COMMON['base_url'].'/users/editbyid/'.$user->id ?>' "><input type="button" value="Back" onclick="history.back()"></td></tr>
-		<?php endforeach; session_destroy(); ?>
+		<?php endforeach; unset($_SESSION['message']); ?>
 	</table>
-
-</body>
-</html>

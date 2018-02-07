@@ -1,14 +1,3 @@
-<?php
-$base_url = COMMON['base_url'];
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>ADD USER</title>
-	
-</head>
-<body >
-
 	<form method="post" action="<?= $base_url ?>/users/create" enctype="multipart/form-data">
 		<table>
 			<tr><td align="center" colspan="2"><h1>Register</h1></td></tr>
@@ -68,6 +57,3 @@ $base_url = COMMON['base_url'];
 			</tr>
 		</table>
 	</form>
-
-</body>
-</html>

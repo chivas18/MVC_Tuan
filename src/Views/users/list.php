@@ -1,6 +1,5 @@
 <?php
-$base_url = COMMON['base_url'];
-//if (!defined('IN_SITE')) die ('The request not found');
+if (!defined('IN_SITE')) die ('The request not found');
 ?>
 <div align="center" style="color: red"><h1><?= isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?></h1></div>
 <table border="1" align="center">
@@ -32,6 +31,12 @@ $base_url = COMMON['base_url'];
 <?php endforeach; unset($_SESSION['message']); ?>
 <tr><td colspan="8" align="center">
 	<?php 
+	if (isset($_GET['page'])) {
+		$_SESSION['page'] = $_GET['page'];
+	}else{
+		$_SESSION['page'] = 1;
+	}
+	
             // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
 	if ($_GET['current_page'] > 1 && $_GET['total_page'] > 1){
 		$_GET['page'] = $_GET['current_page']-1;
@@ -50,7 +55,6 @@ $base_url = COMMON['base_url'];
 			echo '<a href="'.$base_url.'/users/list?page='.$_GET['page'].'">'.$i.'</a> | ';
 		}
 	}
-
 		// nếu current_page < $total_page và total_page > 1 mới hiển thị nút next
 	if ($_GET['current_page'] < $_GET['total_page'] && $_GET['total_page'] > 1){
 		$_GET['page'] = $_GET['current_page']+1;

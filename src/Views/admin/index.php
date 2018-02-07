@@ -1,4 +1,6 @@
 <?php define('IN_SITE',true);
+$base_url = COMMON['base_url'];
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,9 +18,7 @@
 	<div id="container">
 		<?php include_once 'layout/menuleft.php'; ?>
 		<div id="content">
-			<?php
-			include_once SRC.'Views/users/list.php';
-			?>
+			<?php include_once SRC.'Views/layout/admin.php'; ?>
 		</div>
 	</div>
 	<?php include_once 'layout/footer.php';	?>

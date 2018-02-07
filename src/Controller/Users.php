@@ -35,7 +35,7 @@ class Users extends Controller
 		$start = ($current_page - 1) * $limit;
 
 		$users = $this->user->find(1)->offset($start)->take($limit)->get();
-		$this->view('admin/index',array( 'users'=> $users));
+		$this->view('admin/index/users/list',array( 'users'=> $users));
 		return;
 	}
 
@@ -46,7 +46,7 @@ class Users extends Controller
 	{
 		$users = $this->user->find(1)->where('id',$user_id)->get(); 
 		//return view
-		$this->view('admin/index',array( 'users'=> $users));
+		$this->view('admin/index/users/viewbyid',array( 'users'=> $users));
 		return;
 	}
 
@@ -57,7 +57,7 @@ class Users extends Controller
 	{
 		$users = $this->user->find(1)->where('id',$user_id)->get();
 		//return view
-		$this->view('admin/index',array( 'users'=> $users));
+		$this->view('admin/index/users/edit',array( 'users'=> $users));
 	}
 
 	/**
@@ -66,7 +66,7 @@ class Users extends Controller
 	*/
 	public function add()
 	{
-		$this->view('users/add');
+		$this->view('admin/index/users/add');
 	}
 
 	/**
@@ -150,7 +150,7 @@ class Users extends Controller
 									'url_avatar' => $url_avatar					
 								]); 
 								$_SESSION['message'] = 'Successfully!!!';
-								$this->redirect('users');
+								$this->redirect('users/list');
 							} else {
 								$this->redirect('users/add?username='.$_POST['username'].'&display_name='.$_POST['display_name'].'&err_message=Email is empty!');
 							}
@@ -227,7 +227,7 @@ class Users extends Controller
 		//thiss
 		$user = $this->user->where('id',$user_id);
 		$user->delete();
-		$this->redirect('users/list');
+		$this->redirect('users/list?page='.$_SESSION['page']);
 	}
 
 }

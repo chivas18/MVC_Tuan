@@ -19,8 +19,13 @@ class Controller extends Session
 	{	
 		//extract array to var
 		extract($data);
+		$user = explode('/',$view);
+		// echo '<pre>';
+		// print_r($user);
+		// echo '</pre>';
+		// die('test'); 
 		//include file view
-		require_once '../src/Views/' .$view. '.php';
+		require_once '../src/Views/'.$user[0].'/'.$user[1].'.php';
 	}
 
 	/**
