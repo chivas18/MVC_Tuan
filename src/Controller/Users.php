@@ -14,9 +14,9 @@ class Users extends Controller
 
 	public function index()
 	{ 
-		$users = $this->user->find(1)->get();
+		$users = $this->user->find(1)->get()->count();
 		//Tìm tổng số Record
-		$total_record = count($users);
+		$total_record = $users;
 
 		//Tìm limit và current page
 		$current_page = isset($_GET['page']) ? $_GET['page'] : 1;

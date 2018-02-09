@@ -19,7 +19,7 @@ body {
 }
 #container{
 	border: 1px solid grey;
-	height: 880px;
+	height: 1000px;
 }
 form{
 	margin: 0px auto;
@@ -52,7 +52,9 @@ list-style-type: none;
  background-color: #454545;
 }
 #container #content{
-
+width: 800px;
+margin: 0px auto;
+float: right;
 }
 #footer{
  font-size: 85%;

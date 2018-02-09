@@ -1,4 +1,10 @@
-<?php define('IN_SITE',true);
+<?php 
+if (isset($_SESSION['user'])) {
+	define('IN_SITE',true);
+}else{
+	header('location: '.COMMON['base_url'].'/admin');
+}
+
 $base_url = COMMON['base_url'];
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>
@@ -6,7 +12,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 <html>
 <head>
 	<title>Admin Page</title>
-	<link rel="stylesheet" type="text/css" href="<?= COMMON['base_url'].'/public/css/styleAdmin.css' ?>" >
+	<link rel="stylesheet" type="text/css" href="<?= $base_url.'/public/css/styleAdmin.css' ?>" >
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="<?= COMMON['base_url'].'/public/js/admin.js' ?>"></script>
 <meta charset="UTF-8">

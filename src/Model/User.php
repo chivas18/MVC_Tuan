@@ -14,7 +14,6 @@
 */
 class User extends BaseModel
 {
-	public $name;
 	protected $table = 'users';
 	protected $fillable = ['id','username','password','email','display_name','position','status','facebook','google','twitter','phone','description','url_avatar','created_at,updated_at'];
 
@@ -39,9 +38,5 @@ class User extends BaseModel
 			return false;
 		}
 		
-	}
-	public static function paging()
-	{
-		$list = DB::table('users')->paginate(10);
 	}
 }

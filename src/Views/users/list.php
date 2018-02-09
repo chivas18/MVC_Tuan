@@ -1,7 +1,7 @@
 <?php
 if (!defined('IN_SITE')) die ('The request not found');
 ?>
-<div align="center" style="color: red"><h1><?= isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?></h1></div>
+
 <table border="1" align="center">
 	<tr><td colspan="8" align="center" bgcolor="yellow">
 		<h1>LIST USER</h1>
@@ -28,14 +28,10 @@ if (!defined('IN_SITE')) die ('The request not found');
 		<td><a href="<?= $base_url.'/users/editbyid/'.$user->id ?>">Edit</a></td>
 		<td><a href="<?= $base_url.'/users/delete/'.$user->id ?>" onclick="return onDel()">Delete</a></td>
 	</tr>
-<?php endforeach; unset($_SESSION['message']); ?>
+<?php endforeach; ?>
+
 <tr><td colspan="8" align="center">
 	<?php 
-	if (isset($_GET['page'])) {
-		$_SESSION['page'] = $_GET['page'];
-	}else{
-		$_SESSION['page'] = 1;
-	}
 	
             // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
 	if ($_GET['current_page'] > 1 && $_GET['total_page'] > 1){
